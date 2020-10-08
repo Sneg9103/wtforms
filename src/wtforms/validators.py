@@ -282,8 +282,9 @@ class DataRequired:
     Sets the `required` attribute on widgets.
     """
 
-    def __init__(self, message=None):
+    def __init__(self, message=None, response='This field is required.'):
         self.message = message
+        self.response = response
         self.field_flags = {"required": True}
 
     def __call__(self, form, field):
@@ -291,7 +292,7 @@ class DataRequired:
             return
 
         if self.message is None:
-            message = field.gettext("This field is required.")
+            message = field.gettext(self.response)
         else:
             message = self.message
 
